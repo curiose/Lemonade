@@ -93,7 +93,7 @@ fun HeaderLemonadeApp(title: String) {
             mutableStateOf(1)
         }
 
-
+        var squeezeCount by remember { mutableStateOf(0) }
 
         when(currentStep) {
             1 -> {
@@ -110,6 +110,7 @@ fun HeaderLemonadeApp(title: String) {
                         .wrapContentSize()
                         .clickable {
                             currentStep = 2
+                            squeezeCount = (2..4).random()
                         }
                 )
                     Spacer(modifier = Modifier.height(50.dp))
@@ -131,7 +132,10 @@ fun HeaderLemonadeApp(title: String) {
                         modifier = Modifier
                             .wrapContentSize()
                             .clickable {
-                                currentStep = 3
+                                squeezeCount--
+                                if (squeezeCount == 0) {
+                                    currentStep = 3
+                                }
                             }
                     )
                     Spacer(modifier = Modifier.height(32.dp))
